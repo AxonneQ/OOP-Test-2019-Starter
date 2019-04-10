@@ -18,15 +18,6 @@ public class UI extends PApplet
 	public ArrayList<Colour> colours;
 	public ArrayList<Resistor> resistors;
 
-	public void separate(int value) {
-		int hundreds = (value / 100);
-		int tens = (value - (hundreds * 100)) / 10;
-		int ones = value - ((hundreds * 100) + (tens * 10));
-		print(hundreds + ",");
-		print(tens + ",");
-		println(ones);
-	}
-
 	//Colours
 	public void loadColours(){
 		Table t = loadTable("colours.csv", "header");
@@ -62,19 +53,17 @@ public class UI extends PApplet
 	//Processing Main Loop + Settings:
 	public void settings() {
 		size(500, 800);
-
-		separate(381);
-		separate(1);
-		separate(92);
-
-
 	}
 
 	public void setup() {
 		colours = new ArrayList<Colour>();
 		resistors = new ArrayList<Resistor>();
 		loadColours();
+
+		System.out.println("Printing colours:");
 		printColours();
+
+		System.out.println("\n\nPrinting resistors (100,10,1):");
 		loadResistors();
 	}
 
@@ -113,7 +102,31 @@ public class UI extends PApplet
 		}
 	
 		public void render(float offset){
+			float halfW = width/2;
+			float halfH = height/2;
+			PVector start = new PVector(halfW-150, halfH * 0.2f + offset);
 
+			Colour h = findColour(hundreds);
+			Colour t = findColour(tens);
+			Colour o = findColour(ones);
+
+			stroke(0);
+			line(start.x, start.y, start.x + 60, start.y);
+			noFill();
+			square(start.x +60, start.y - 50, 100);
+			line(start.x + 160, start.y, start.x + 220, start.y);
+			noStroke();
+			fill(h.r, h.g, h.b);
+			rect(start.x +70, start.y -50, 10, 100);
+			fill(t.r, t.g, t.b);
+			rect(start.x +90, start.y -50, 10, 100);
+			fill(o.r, o.g, o.b);
+			rect(start.x +110, start.y -50, 10, 100);
+
+			textSize(24);
+			fill(0);
+			text(value, start.x + 260, start.y + (24/2));
+		
 			
 		}
 	}
