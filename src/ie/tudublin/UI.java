@@ -28,6 +28,12 @@ public class UI extends PApplet
 		}
 	}
 
+	public void printColours() {
+		for(Colour c : colours){
+			System.out.println(c.toString());
+		}
+	}
+
 	public void settings() {
 		size(500, 800);
 
