@@ -10,15 +10,21 @@ public class Colour {
 	public int value;
 	private String colour;
 
+	//Constructors
+	public Colour(int r, int g, int b, int value, String colour){
+		this.r = r;
+		this.g = g;
+		this.b = b;
+		this.value = value;
+		this. colour = colour;
+	}
 	public Colour(TableRow r){
-		this.r = r.getInt("r");
-		g = r.getInt("g");
-		b = r.getInt("b");
-		colour = r.getString("colour");
-		value = r.getInt("value");
-		
+		this(r.getInt("r"), r.getInt("g"), r.getInt("b"), r.getInt("value"), r.getString("colour"));
 	}
 
+
+
+	
 	public String toString(){
 		return colour;
 	}
